@@ -1,28 +1,12 @@
 package listas;
 
 public class Nodo<T> {
-    private T value;
-    private Nodo next;
+    public T value;
+    public Nodo<T> next;
     
     public Nodo(T value){
         this.value = value;
         this.next = null;
-    }
-
-    public T getValue() {
-        return value;
-    }
-
-    public void setValue(T value) {
-        this.value = value;
-    }
-
-    public Nodo getNext() {
-        return next;
-    }
-
-    public void setNext(Nodo next) {
-        this.next = next;
     }
 }
 
