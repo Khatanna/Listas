@@ -69,6 +69,14 @@ public class LinkedList<T> {
         return current;
     }
     
+    public void concat(LinkedList<T> ListB){
+        Nodo<T> current = this.head;
+ 
+        while(current.next != null){
+            current = current.next;
+        }
+        current.next = ListB.head;
+    }
 
     @Override
     public String toString() {

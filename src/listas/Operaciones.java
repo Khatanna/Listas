@@ -101,7 +101,97 @@ public class Operaciones {
         }
     }
 
-    public static void main(String args[]) {
+    public LinkedList<Integer> unirListaIntercaladamente(LinkedList<Integer> listA, LinkedList<Integer> listB) {
+        Nodo<Integer> currentA = listA.head;
+        Nodo<Integer> currentB = listB.head;
+        LinkedList<Integer> finalList = new LinkedList<>();
 
+        while (currentA != null || currentB != null) {
+            if (currentA != null) {
+                finalList.insertEnd(currentA.value, finalList.head);
+                currentA = currentA.next;
+            }
+            if (currentB != null) {
+                finalList.insertEnd(currentB.value, finalList.head);
+                currentB = currentB.next;
+            }
+        }
+        return finalList;
+    }
+
+    public void eliminarMenoresDeUnElementoDado(LinkedList<Integer> List, int elemento) {
+        Nodo<Integer> current = List.head;
+        LinkedList<Integer> auxList = new LinkedList<>();
+
+        while (current != null) {
+            if (current.value > elemento) {
+                auxList.insertEnd(current.value, auxList.head);
+            }
+            current = current.next;
+        }
+
+        List.head = auxList.head;
+    }
+
+    public int elementoMayor(LinkedList<Integer> List) {
+        int mayor = 0;
+        Nodo<Integer> current = List.head;
+
+        while (current != null) {
+            if (current.value > mayor) {
+                mayor = current.value;
+            }
+            current = current.next;
+        }
+        return mayor;
+    }
+
+    public int elementoMenor(LinkedList<Integer> List) {
+        int menor = elementoMayor(List);
+        Nodo<Integer> current = List.head;
+
+        while (current != null) {
+            if (current.value < menor) {
+                menor = current.value;
+            }
+            current = current.next;
+        }
+        return menor;
+    }
+
+    public int segundoElementoMenor(LinkedList<Integer> List) {
+        List.deleteElementForValues(elementoMenor(List));
+        int menor = elementoMayor(List);
+        Nodo<Integer> current = List.head;
+
+        while (current != null) {
+            if (current.value < menor) {
+                menor = current.value;
+            }
+            current = current.next;
+        }
+        return menor;
+    }
+    
+    public static void main(String args[]) {
+        Operaciones op = new Operaciones();
+        LinkedList<Integer> list = new LinkedList<>();
+        LinkedList<Integer> listB = new LinkedList<>();
+        
+        list.insertEnd(10, list.head);
+        list.insertEnd(20, list.head);
+        list.insertEnd(30, list.head);
+        list.insertEnd(40, list.head);
+        list.insertEnd(50, list.head);
+        list.insertEnd(60, list.head);
+        list.insertEnd(70, list.head);
+        listB.insertEnd(80, listB.head);
+        listB.insertEnd(90, listB.head);
+        listB.insertEnd(100, listB.head);
+        
+        list.concat(listB);
+        
+        System.out.println(list);
+        System.out.println(listB);
     }
 }
