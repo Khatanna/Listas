@@ -2,11 +2,13 @@ package listas;
 
 public class Operaciones {
 
-    public void generarLista(LinkedList<Integer> Lista, int n) {
+    public LinkedList<Integer> generarLista(int n) {
+        LinkedList<Integer> Lista = new LinkedList<>();
         for (int i = 0; i < n; i++) {
             int value = (int) (Math.random() * 50 + 1);
             Lista.insertEnd(value, Lista.head);
         }
+        return Lista;
     }
 
     public int SumarTodosLosElementos(LinkedList<Integer> Lista) {
@@ -54,7 +56,7 @@ public class Operaciones {
 
         while (aux != null) {
             count = aux.value % 2 == 0 ? count + 1 : count;
-            
+
             aux = aux.next;
         }
 
@@ -78,19 +80,28 @@ public class Operaciones {
         return listaResultado;
     }
 
-    public static void main(String args[]) {
-        Operaciones op = new Operaciones();
-        LinkedList<Integer> lista = new LinkedList<>();
+    public void insertInOrder(LinkedList<Integer> Lista, int value) {
+        Nodo<Integer> nuevo = new Nodo(value);
+        if (Lista.head == null) {
+            Lista.head = nuevo;
+        } else {
+            Nodo<Integer> current = Lista.head;
+            Nodo<Integer> previous = null;
 
-        op.generarLista(lista, 10);
-        System.out.println(lista);
-        int total = op.SumarTodosLosElementos(lista);
-        int nodos = op.ContarNodos(lista);
-        int pares = op.ContarNodosConValoresPares(lista);
-        int primos = op.SumarTodosLosElementosPrimos(lista);
-        System.out.println(total);
-        System.out.println(nodos);
-        System.out.println(pares);
-        System.out.println(primos);
+            while (current != null && current.value < value) {
+                previous = current;
+                current = current.next;
+            }
+            if (previous == null) {
+                Lista.head = nuevo;
+            } else {
+                previous.next = nuevo;
+            }
+            nuevo.next = current;
+        }
+    }
+
+    public static void main(String args[]) {
+
     }
 }

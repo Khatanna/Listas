@@ -68,6 +68,7 @@ public class LinkedList<T> {
         current.next = null;
         return current;
     }
+    
 
     @Override
     public String toString() {
